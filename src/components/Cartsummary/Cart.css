@@ -1,0 +1,9 @@
+.Orderheader {
+	text-align: center;
+	color: rgb(250, 213, 91);
+}
+
+.info {
+	display: flex;
+	justify-content: space-between;
+}
