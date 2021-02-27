@@ -3,10 +3,10 @@ import "./Reviewproduct.css";
 
 const Reviewproduct = (props) => {
 	const dataCatch = props.productData;
-	const { name, img, seller, price, stock } = dataCatch;
+	const { name, img, seller, price, stock, key } = dataCatch;
 
 	return (
-		<div>
+		<div id={key}>
 			<div className="FullProductData">
 				<div className="productImage">
 					<img src={img} alt="" />

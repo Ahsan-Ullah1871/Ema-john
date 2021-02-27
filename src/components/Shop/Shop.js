@@ -15,7 +15,6 @@ const Shop = () => {
 		const newCart = [...cart, product];
 		setCart(newCart);
 		localStorage.setItem("product", JSON.stringify(newCart));
-		console.log(JSON.parse(localStorage.getItem("product")));
 	};
 
 	return (

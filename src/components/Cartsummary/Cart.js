@@ -16,7 +16,9 @@ const Cart = (props) => {
 			charge = 0;
 		} else if (price > 15) {
 			charge = 5;
-		} else if (price < 15 && price !== 0);
+		} else if (price < 15 && price !== 0) {
+			charge = 3;
+		}
 		return charge;
 	};
 
