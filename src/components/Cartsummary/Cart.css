@@ -7,3 +7,12 @@
 	display: flex;
 	justify-content: space-between;
 }
+.review-btn {
+	text-align: center;
+	text-decoration: none;
+	width: 600px;
+	background-color: goldenrod;
+	padding: 10px 40px;
+	border-radius: 10px;
+	margin: 10px 10%;
+}

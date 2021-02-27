@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Shop from "./components/Shop/Shop";
 import { Route, Switch } from "react-router-dom";
 import Orderreview from "./components/Orderreview/Orderreview";
+import Manage from "./components/Manage/Manage";
 function App() {
 	return (
 		<div>
@@ -17,6 +18,11 @@ function App() {
 					exact
 					path="/orderreview"
 					component={Orderreview}
+				></Route>
+				<Route
+					exact
+					path="/manage"
+					component={Manage}
 				></Route>
 			</Switch>
 		</div>
