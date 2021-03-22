@@ -1,14 +1,16 @@
 import React from "react";
-import "./Cart.css";
 import { Link } from "react-router-dom";
+import "./Cart.css";
 
 const Cart = (props) => {
 	const cart = props.cart;
 
-	const price = cart.reduce(
-		(previous, current) => previous + current.price,
+	const priceMath = cart.reduce(
+		(previous, current) =>
+			previous + current.price * current.quantity,
 		0
 	);
+	const price = Number(Math.round(priceMath));
 
 	const shippingCharge = (price) => {
 		let charge = 0;
@@ -39,7 +41,7 @@ const Cart = (props) => {
 				</div>
 				<div className="info">
 					<p>Shipping & Handing: </p>
-					<p>${shippingCharge(price)}</p>
+					<p>${shippingCharge(Math.round(price))}</p>
 				</div>
 				<div className="info">
 					<p>Total before Tax:</p>
@@ -58,14 +60,7 @@ const Cart = (props) => {
 							tax(price)}
 					</h5>
 				</div>
-
-				<Link
-					className="review-btn"
-					exact
-					to="/orderreview"
-				>
-					Order Review
-				</Link>
+				{props.children}
 			</div>
 		</div>
 	);

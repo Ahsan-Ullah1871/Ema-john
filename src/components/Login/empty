@@ -1,0 +1,54 @@
+	const submitClick = (e) => {
+		if (newUser && user.email && user.password) {
+			firebase
+				.auth()
+				.createUserWithEmailAndPassword(
+					user.email,
+					user.password
+				)
+
+				.then((res) => {
+					const newInfo = {
+						...user,
+					};
+					newInfo.error = "";
+					newInfo.success = true;
+					setUser(newInfo);
+					updateInfo(user.name);
+				})
+				.catch((error) => {
+					let errorMessage = error.message;
+					// ..
+					const newInfo = { ...user };
+					newInfo.error = errorMessage;
+					newInfo.success = false;
+					setUser(newInfo);
+				});
+		} else if (!newUser && user.email && user.password) {
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(
+					user.email,
+					user.password
+				)
+
+				.then((res) => {
+					const newInfo = {
+						...user,
+					};
+					newInfo.error = "";
+					newInfo.success = true;
+					setUser(newInfo);
+					console.log("updated  Info", res.user);
+				})
+				.catch((error) => {
+					let errorMessage = error.message;
+
+					const newInfo = { ...user };
+					newInfo.error = errorMessage;
+					newInfo.success = false;
+					setUser(newInfo);
+				});
+		}
+		e.preventDefault();
+	};

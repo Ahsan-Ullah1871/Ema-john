@@ -2,15 +2,18 @@ import React from "react";
 import "./Product.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 const Product = (props) => {
-	const { name, img, price, seller, stock } = props.productData;
+	const { name, img, price, seller, stock, key } = props.productData;
 	return (
 		<div className="product">
 			<div className="productImage">
 				<img src={img} alt="" />
 			</div>
 			<div className="productInfo">
-				<h3 className="productName">{name} </h3>
+				<h3 className="productName">
+					<Link to={"/product/" + key}>{name}</Link>{" "}
+				</h3>
 				<p>
 					<small>by: {seller}</small>
 				</p>
@@ -23,15 +26,21 @@ const Product = (props) => {
 						soon
 					</small>
 				</p>
-				<button
-					className="cartButton"
-					onClick={() =>
-						props.cartHandler(props.productData)
-					}
-				>
-					<FontAwesomeIcon icon={faShoppingCart} /> add
-					to cart
-				</button>
+				{props.showAddToCart === true && (
+					<button
+						className="cartButton"
+						onClick={() =>
+							props.cartHandler(
+								props.productData
+							)
+						}
+					>
+						<FontAwesomeIcon
+							icon={faShoppingCart}
+						/>{" "}
+						add to cart
+					</button>
+				)}
 			</div>
 		</div>
 	);
