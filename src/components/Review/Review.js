@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import fakeData from "../../fakeData";
 import {
 	getDatabaseCart,
 	processOrder,
@@ -15,16 +14,17 @@ const Review = () => {
 	useEffect(() => {
 		const savedProduct = getDatabaseCart();
 		const productKeys = Object.keys(savedProduct);
-		// const counts = Object.values(savedProduct);
-		// const counts = productKeys.map((key) => savedProduct[key]);
-		// console.log(counts);
-		const cartProducts = productKeys.map((key) => {
-			const product = fakeData.find((pd) => pd.key === key);
-			product.quantity = savedProduct[key];
-			return product;
-		});
-		setCart(cartProducts);
-		console.log(cartProducts);
+
+		fetch(
+			"https://protected-fjord-17093.herokuapp.com/getProductByKeys",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(productKeys),
+			}
+		)
+			.then((response) => response.json())
+			.then((data) => setCart(data));
 	}, []);
 	const removeHandler = (key) => {
 		const newCart = cart.filter((pd) => pd.key !== key);

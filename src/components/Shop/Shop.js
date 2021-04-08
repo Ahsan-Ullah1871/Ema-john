@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import fakeData from "../../fakeData";
 import {
 	addToDatabaseCart,
 	getDatabaseCart,
@@ -10,22 +9,28 @@ import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
-	const first10Data = fakeData.slice(0, 10);
-
-	const [products, setproduct] = useState(first10Data);
+	const [products, setProducts] = useState([]);
+	useEffect(() => {
+		fetch("https://protected-fjord-17093.herokuapp.com/products")
+			.then((response) => response.json())
+			.then((data) => setProducts(data));
+	}, []);
 
 	const [cart, setCart] = useState([]);
 
 	useEffect(() => {
 		const savedProduct = getDatabaseCart();
 		const productKeys = Object.keys(savedProduct);
-
-		const cartProducts = productKeys.map((key) => {
-			const product = fakeData.find((pd) => pd.key === key);
-			product.quantity = savedProduct[key];
-			return product;
-		});
-		setCart(cartProducts);
+		fetch(
+			"https://protected-fjord-17093.herokuapp.com/getProductByKeys",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(productKeys),
+			}
+		)
+			.then((response) => response.json())
+			.then((data) => setCart(data));
 	}, []);
 
 	const cartHandler = (product) => {

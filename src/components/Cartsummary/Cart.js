@@ -7,7 +7,7 @@ const Cart = (props) => {
 
 	const priceMath = cart.reduce(
 		(previous, current) =>
-			previous + current.price * current.quantity,
+			previous + current.price * (current.quantity || 1),
 		0
 	);
 	const price = Number(Math.round(priceMath));

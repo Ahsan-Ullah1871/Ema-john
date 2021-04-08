@@ -13,6 +13,7 @@ import {
 } from "./LoginManegment";
 
 import firebaseConfig from "../../firebase.config";
+import { useHistory, useLocation } from "react-router";
 
 if (!firebase.apps.length) {
 	firebase.initializeApp(firebaseConfig);
@@ -29,6 +30,9 @@ function Login() {
 		error: "",
 		success: false,
 	});
+	let history = useHistory();
+	let location = useLocation();
+	let { from } = location.state || { from: { pathname: "/" } };
 	initializeFramework();
 	const [userLogin, setUserLogin] = useContext(UserLoginContext);
 	const handleGetData = (e) => {
@@ -76,6 +80,7 @@ function Login() {
 		googleSingInHandle().then((res) => {
 			setUser(res);
 			setUserLogin(res);
+			history.replace(from);
 		});
 	};
 	//googleSignout

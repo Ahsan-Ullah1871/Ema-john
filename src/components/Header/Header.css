@@ -8,11 +8,11 @@
 }
 nav {
 	background-color: black;
-	text-align: right;
 	font-size: 20px;
 	line-height: 40px;
 }
 nav a {
+	background-color: none;
 	text-decoration: none;
 	color: white;
 	margin: 0px 20px;
@@ -21,4 +21,7 @@ nav a {
 
 nav a:hover {
 	background-color: rgb(58, 57, 57);
+}
+nav button {
+	cursor: pointer;
 }
